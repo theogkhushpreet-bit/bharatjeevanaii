@@ -1,7 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 
 export default async function handler(req, res) {
-  // Only allow POST requests
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
     return res.status(405).json({ success: false, error: `Method ${req.method} Not Allowed` });
@@ -15,7 +14,7 @@ export default async function handler(req, res) {
     }
 
     if (!process.env.GEMINI_API_KEY) {
-      return res.status(500).json({ success: false, error: 'Server configuration error: API key missing on server.' });
+      return res.status(500).json({ success: false, error: 'Configuration Error: GEMINI_API_KEY is missing in Vercel environment variables.' });
     }
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
@@ -37,18 +36,10 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Gemini API Error:', error);
-
-    let errorMessage = 'An error occurred while processing your request.';
-    if (error.status === 429 || (error.message && error.message.includes('rate limit'))) {
-      errorMessage = 'Rate limit reached. Please try again in a moment.';
-    } else if (error.status === 403 || (error.message && error.message.includes('API key'))) {
-      errorMessage = 'Authentication error with AI provider.';
-    }
-
+    console.error('Gemini Backend Error Details:', error);
     return res.status(500).json({
       success: false,
-      error: errorMessage
+      error: `AI Error: ${error.message || 'Unknown server error occurred.'}`
     });
   }
 }
