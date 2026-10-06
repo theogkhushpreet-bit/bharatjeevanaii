@@ -8,12 +8,10 @@ chatForm.addEventListener('submit', async (e) => {
     const message = userInput.value.trim();
     if (!message) return;
 
-    // Append user message
     appendMessage(message, 'user-message');
     userInput.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Show typing indicator
     typingIndicator.classList.remove('hidden');
     chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -26,6 +24,12 @@ chatForm.addEventListener('submit', async (e) => {
             body: JSON.stringify({ message })
         });
 
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const rawText = await response.text();
+            throw new Error(`Server returned non-JSON response (${response.status}): ${rawText.slice(0, 100)}`);
+        }
+
         const data = await response.json();
         typingIndicator.classList.add('hidden');
 
@@ -37,7 +41,7 @@ chatForm.addEventListener('submit', async (e) => {
     } catch (error) {
         typingIndicator.classList.add('hidden');
         console.error('Connection error:', error);
-        appendMessage('Unable to connect to Bharat Jeevan AI server. Please check your internet connection.', 'ai-message error');
+        appendMessage(`Error: ${error.message}`, 'ai-message error');
     }
 
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -53,8 +57,6 @@ function appendMessage(text, className) {
 
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
-    
-    // Simple line break formatting
     bubble.innerHTML = text.replace(/\n/g, '<br>');
 
     messageDiv.appendChild(avatar);
