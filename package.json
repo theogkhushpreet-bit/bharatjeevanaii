@@ -1,0 +1,15 @@
+{
+  "name": "bharat-jeevan-ai",
+  "version": "1.0.0",
+  "description": "Bharat Jeevan AI - AI for a Smarter and More Inclusive India",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google/genai": "^0.1.1"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

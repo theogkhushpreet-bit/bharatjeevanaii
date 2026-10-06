@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Jeevan AI — AI for a Smarter India</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="tricolour-bar">
+                <span class="stripe saffron"></span>
+                <span class="stripe white"></span>
+                <span class="stripe green"></span>
+            </div>
+            <h1>Bharat Jeevan AI</h1>
+        </div>
+        <p class="tagline">AI for a Smarter and More Inclusive India</p>
+    </header>
+
+    <main class="chat-container">
+        <div id="chat-box" class="chat-box">
+            <div class="message ai-message">
+                <div class="avatar">🇮🇳</div>
+                <div class="bubble">
+                    Namaste! I am <strong>Bharat Jeevan AI</strong>, your India-focused digital assistant. Ask me questions about studies, science, Indian history, geography, technology, or daily life!
+                </div>
+            </div>
+        </div>
+
+        <div id="typing-indicator" class="typing-indicator hidden">
+            <span></span><span></span><span></span>
+        </div>
+
+        <form id="chat-form" class="chat-input-form">
+            <input 
+                type="text" 
+                id="user-input" 
+                placeholder="Ask a question or type something in English, Hindi..." 
+                autocomplete="off" 
+                required
+            >
+            <button type="submit" id="send-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p>Student Innovation Project • Powered by Google Gemini & Vercel</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
